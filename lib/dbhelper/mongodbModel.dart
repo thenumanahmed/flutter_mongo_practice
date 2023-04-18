@@ -6,12 +6,13 @@ import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+MongoDbModel welcomeFromJson(String str) =>
+    MongoDbModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(MongoDbModel data) => json.encode(data.toJson());
 
-class Welcome {
-  Welcome({
+class MongoDbModel {
+  MongoDbModel({
     required this.id,
     required this.firstname,
     required this.lastname,
@@ -23,7 +24,7 @@ class Welcome {
   String lastname;
   String address;
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory MongoDbModel.fromJson(Map<String, dynamic> json) => MongoDbModel(
         id: json["_id"],
         firstname: json["firstname"],
         lastname: json["lastname"],

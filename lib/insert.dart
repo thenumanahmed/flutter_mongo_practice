@@ -1,5 +1,8 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:mongo_practice/dbhelper/mongodb.dart';
+import 'package:mongo_practice/dbhelper/mongodbModel.dart';
 
 class MongoDbInsert extends StatefulWidget {
   const MongoDbInsert({super.key});
@@ -63,7 +66,21 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
     ));
   }
 
-  Future<void> _insertData(String fName, String lName, String address) async {}
+  Future<void> _insertData(String fName, String lName, String address) async {
+    var _id = M.ObjectId(); // storing unique id
+    final data = MongoDbModel(
+        id: _id, firstname: fName, lastname: lName, address: address);
+    var result = await MongoDatabase.insert(data);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Data Inserted ID' + _id.$oid)));
+    _clearAll();
+  }
+
+  void _clearAll() {
+    fNameController.text = "";
+    lNameController.text = "";
+    addressController.text = "";
+  }
 
   void _fakeData() {
     fNameController.text = faker.person.firstName();
