@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mongo_practice/dbhelper/mongodb.dart';
+import 'package:mongo_practice/display.dart';
 import 'package:mongo_practice/insert.dart';
 
 Future<void> main() async {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MongoDbInsert(),
+      home: const MongoDbDisplay(),
     );
   }
 }
