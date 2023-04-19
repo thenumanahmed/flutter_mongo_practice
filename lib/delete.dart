@@ -19,7 +19,7 @@ class _MongoDbDeleteState extends State<MongoDbDelete> {
         future: MongoDatabase.getData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
@@ -32,7 +32,7 @@ class _MongoDbDeleteState extends State<MongoDbDelete> {
                         MongoDbModel.fromJson(snapshot.data[index]));
                   });
             } else {
-              return Center(
+              return const Center(
                 child: Text('No Data Found'),
               );
             }
@@ -55,15 +55,15 @@ class _MongoDbDeleteState extends State<MongoDbDelete> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _text(data.firstname),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   _text(data.lastname),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   _text(data.address),
                 ],
               ),
               IconButton(
                   onPressed: () async {
-                    print(data.id);
+                    // print(data.id);
                     await MongoDatabase.delete(data);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Data Deleted ID${data.id.$oid}')));
@@ -80,7 +80,7 @@ class _MongoDbDeleteState extends State<MongoDbDelete> {
   Widget _text(String value) {
     return Text(
       value,
-      style: TextStyle(fontSize: 20),
+      style: const TextStyle(fontSize: 20),
     );
   }
 }

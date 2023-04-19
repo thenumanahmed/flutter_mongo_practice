@@ -44,10 +44,9 @@ class MongoDatabase {
 
     // Perform the update operation
     final result = await userCollection!.replaceOne(filter, data.toJson());
-    // final result = await userCollection!.updateOne(filter, data);
 
-    print('Updated ${result.document} document');
-    print('Updated ${filter} document');
+    // print('Updated ${result.document} document');
+    // print('Updated ${filter} document');
   }
 
   static Future<String> insert(MongoDbModel data) async {
@@ -59,7 +58,7 @@ class MongoDatabase {
         return 'Something Went Wrong while inserting data';
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       return e.toString();
     }
   }
