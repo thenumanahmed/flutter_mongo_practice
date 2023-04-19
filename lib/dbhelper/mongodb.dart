@@ -37,9 +37,6 @@ class MongoDatabase {
     // Define the filter to identify the document you want to update
     final filter = where.eq('_id', data.id);
 
-    // Define the update operation
-    final update = modify.set('field2', 'new_value');
-
     // Perform the update operation
     final result = await userCollection!.replaceOne(filter, data.toJson());
     // final result = await userCollection!.updateOne(filter, data);
