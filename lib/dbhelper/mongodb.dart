@@ -41,7 +41,8 @@ class MongoDatabase {
     final update = modify.set('field2', 'new_value');
 
     // Perform the update operation
-    final result = await userCollection!.updateOne(filter, data);
+    final result = await userCollection!.replaceOne(filter, data.toJson());
+    // final result = await userCollection!.updateOne(filter, data);
 
     print('Updated ${result.document} document');
     print('Updated ${filter} document');
