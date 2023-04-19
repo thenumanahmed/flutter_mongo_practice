@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:mongo_practice/dbhelper/constant.dart';
 import 'package:mongo_practice/dbhelper/mongodbModel.dart';
@@ -12,12 +11,23 @@ class MongoDatabase {
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
     await db!.open();
-    print(inspect(db));
+    inspect(db);
     userCollection = db!.collection(USER_COLLECTION);
   }
 
   static delete(MongoDbModel user) async {
     await userCollection?.remove(where.id(user.id));
+  }
+
+  static Future<List<Map<String, dynamic>>> getQueryData() async {
+    //find equal to value
+    final data = await userCollection!
+        .find(where.eq('firstName', 'Nikola Tesla'))
+        .toList();
+
+    //find between range
+    // final data = await userCollection!.find(where.gt('age', '59').lt('age','43')).toList();
+    return data;
   }
 
   static Future<List<Map<String, dynamic>>> getData() async {
