@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mongo_practice/dbhelper/mongodb.dart';
-import 'package:mongo_practice/display.dart';
-import 'package:mongo_practice/insert.dart';
+import 'package:mongo_practice/update.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MongoDbDisplay(),
+      home: const MongoDbUpdate(),
     );
   }
 }
