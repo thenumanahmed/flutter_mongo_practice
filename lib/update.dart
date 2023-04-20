@@ -76,7 +76,7 @@ class _MongoDbUpdateState extends State<MongoDbUpdate> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return MongoDbInsert();
+                                return const MongoDbInsert();
                               },
                               settings: RouteSettings(arguments: data)))
                       .then((value) {
