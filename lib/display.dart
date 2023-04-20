@@ -33,7 +33,7 @@ class _MongoDbDisplayState extends State<MongoDbDisplay> {
                           itemCount: snapshot.data.length,
                           itemBuilder: (context, index) {
                             return displayCard(
-                                MongoDbModel.fromJson(snapshot.data[0]));
+                                MongoDbModel.fromJson(snapshot.data[index]));
                           }),
                     );
                   } else {

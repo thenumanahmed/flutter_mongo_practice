@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:mongo_practice/dbhelper/mongodb.dart';
 import 'package:mongo_practice/dbhelper/mongodbModel.dart';
+import 'package:mongo_practice/display.dart';
 
 class MongoDbInsert extends StatefulWidget {
   const MongoDbInsert({super.key});
@@ -30,68 +31,81 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
     //   _checkInsertUpdate = 'Update';
     // }
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            children: [
-              Text(
-                _checkInsertUpdate,
-                style: const TextStyle(fontSize: 22),
+        floatingActionButton: TextButton(
+          child: const Text('View Data'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return const MongoDbDisplay();
+                },
               ),
-              const SizedBox(height: 40),
-              TextField(
-                controller: fNameController,
-                decoration: const InputDecoration(labelText: "First Name"),
-              ),
-              TextField(
-                controller: lNameController,
-                decoration: const InputDecoration(labelText: "Last Name"),
-              ),
-              TextField(
-                minLines: 3,
-                maxLines: 5,
-                controller: addressController,
-                decoration: const InputDecoration(labelText: "Address"),
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton(
-                      onPressed: () {
-                        _fakeData();
-                      },
-                      child: const Text('Generate Data')),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (_checkInsertUpdate == 'Update') {
-                          // _updateData(data.id, fNameController.text,
-                          //     lNameController.text, addressController.text);
-                        } else {
-                          _insertData(fNameController.text,
-                              lNameController.text, addressController.text);
-                        }
-                      },
-                      child: Text(_checkInsertUpdate)),
-                ],
-              )
-            ],
-          ),
+            );
+          },
         ),
-      ),
-    ));
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                children: [
+                  Text(
+                    _checkInsertUpdate,
+                    style: const TextStyle(fontSize: 22),
+                  ),
+                  const SizedBox(height: 40),
+                  TextField(
+                    controller: fNameController,
+                    decoration: const InputDecoration(labelText: "First Name"),
+                  ),
+                  TextField(
+                    controller: lNameController,
+                    decoration: const InputDecoration(labelText: "Last Name"),
+                  ),
+                  TextField(
+                    minLines: 3,
+                    maxLines: 5,
+                    controller: addressController,
+                    decoration: const InputDecoration(labelText: "Address"),
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {
+                            _fakeData();
+                          },
+                          child: const Text('Generate Data')),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (_checkInsertUpdate == 'Update') {
+                              // _updateData(data.id, fNameController.text,
+                              //     lNameController.text, addressController.text);
+                            } else {
+                              _insertData(fNameController.text,
+                                  lNameController.text, addressController.text);
+                            }
+                          },
+                          child: Text(_checkInsertUpdate)),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Future<void> _updateData(
       var id, String fName, String lName, String address) async {
     final updateData = MongoDbModel(
         id: id, firstname: fName, lastname: lName, address: address);
-    print('debug call update');
+    // print('debug call update');
     await MongoDatabase.update(updateData)
         .whenComplete(() => Navigator.pop(context));
-    print('debug after call upadte');
+    // print('debug after call upadte');
   }
 
   Future<void> _insertData(String fName, String lName, String address) async {
@@ -100,7 +114,7 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
         id: _id, firstname: fName, lastname: lName, address: address);
     var result = await MongoDatabase.insert(data);
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Data Inserted ID' + _id.$oid)));
+        .showSnackBar(SnackBar(content: Text('Data Inserted ID${_id.$oid}')));
     _clearAll();
   }
 
