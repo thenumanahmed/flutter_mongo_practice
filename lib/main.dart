@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mongo_practice/dbhelper/mongodb.dart';
 import 'package:mongo_practice/delete.dart';
+import 'package:mongo_practice/display.dart';
+import 'package:mongo_practice/insert.dart';
 import 'package:mongo_practice/query.dart';
 import 'package:mongo_practice/update.dart';
 
@@ -18,17 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MondoDb Practice',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: const QueryDatabase(),
-        floatingActionButton: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-        ),
-      ),
+      home: const MongoDbInsert(),
     );
   }
 }

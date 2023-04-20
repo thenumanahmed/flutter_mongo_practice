@@ -25,7 +25,8 @@ class _MongoDbDisplayState extends State<MongoDbDisplay> {
                   );
                 } else {
                   if (snapshot.hasData) {
-                    var totalData = snapshot.data.length;
+                    // var totalData = snapshot.data.length;
+                    snapshot.data.length;
                     // print('debug: total data $totalData');
                     return Flexible(
                       child: ListView.builder(
