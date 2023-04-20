@@ -20,63 +20,65 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
 
   @override
   Widget build(BuildContext context) {
-    MongoDbModel data =
-        ModalRoute.of(context)!.settings.arguments as MongoDbModel;
+    // MongoDbModel data =
+    //     ModalRoute.of(context)!.settings.arguments as MongoDbModel;
 
-    if (data != Null) {
-      fNameController.text = data.firstname;
-      lNameController.text = data.lastname;
-      addressController.text = data.address;
-      _checkInsertUpdate = 'Update';
-    }
+    // if (data != Null) {
+    //   fNameController.text = data.firstname;
+    //   lNameController.text = data.lastname;
+    //   addressController.text = data.address;
+    //   _checkInsertUpdate = 'Update';
+    // }
     return Scaffold(
         body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          children: [
-            Text(
-              _checkInsertUpdate,
-              style: TextStyle(fontSize: 22),
-            ),
-            const SizedBox(height: 40),
-            TextField(
-              controller: fNameController,
-              decoration: const InputDecoration(labelText: "First Name"),
-            ),
-            TextField(
-              controller: lNameController,
-              decoration: const InputDecoration(labelText: "Last Name"),
-            ),
-            TextField(
-              minLines: 3,
-              maxLines: 5,
-              controller: addressController,
-              decoration: const InputDecoration(labelText: "Address"),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                OutlinedButton(
-                    onPressed: () {
-                      _fakeData();
-                    },
-                    child: const Text('Generate Data')),
-                ElevatedButton(
-                    onPressed: () {
-                      if (_checkInsertUpdate == 'Update') {
-                        _updateData(data.id, fNameController.text,
-                            lNameController.text, addressController.text);
-                      } else {
-                        _insertData(fNameController.text, lNameController.text,
-                            addressController.text);
-                      }
-                    },
-                    child: Text(_checkInsertUpdate)),
-              ],
-            )
-          ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            children: [
+              Text(
+                _checkInsertUpdate,
+                style: const TextStyle(fontSize: 22),
+              ),
+              const SizedBox(height: 40),
+              TextField(
+                controller: fNameController,
+                decoration: const InputDecoration(labelText: "First Name"),
+              ),
+              TextField(
+                controller: lNameController,
+                decoration: const InputDecoration(labelText: "Last Name"),
+              ),
+              TextField(
+                minLines: 3,
+                maxLines: 5,
+                controller: addressController,
+                decoration: const InputDecoration(labelText: "Address"),
+              ),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OutlinedButton(
+                      onPressed: () {
+                        _fakeData();
+                      },
+                      child: const Text('Generate Data')),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_checkInsertUpdate == 'Update') {
+                          // _updateData(data.id, fNameController.text,
+                          //     lNameController.text, addressController.text);
+                        } else {
+                          _insertData(fNameController.text,
+                              lNameController.text, addressController.text);
+                        }
+                      },
+                      child: Text(_checkInsertUpdate)),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     ));
