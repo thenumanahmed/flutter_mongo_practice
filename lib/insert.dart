@@ -112,7 +112,9 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
     var _id = M.ObjectId(); // storing unique id
     final data = MongoDbModel(
         id: _id, firstname: fName, lastname: lName, address: address);
-    var result = await MongoDatabase.insert(data);
+    // var result = await MongoDatabase.insert(data);
+    // print(result);
+    await MongoDatabase.insert(data);
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Data Inserted ID${_id.$oid}')));
     _clearAll();
