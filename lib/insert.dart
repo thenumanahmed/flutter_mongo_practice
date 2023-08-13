@@ -102,10 +102,8 @@ class _MongoDbInsertState extends State<MongoDbInsert> {
       var id, String fName, String lName, String address) async {
     final updateData = MongoDbModel(
         id: id, firstname: fName, lastname: lName, address: address);
-    // print('debug call update');
     await MongoDatabase.update(updateData)
         .whenComplete(() => Navigator.pop(context));
-    // print('debug after call upadte');
   }
 
   Future<void> _insertData(String fName, String lName, String address) async {
